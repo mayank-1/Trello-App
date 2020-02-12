@@ -1,6 +1,10 @@
 import { createStore } from "redux";
 
-let initialState = {};
+let initialState = {
+  user: {
+    boards: []
+  }
+};
 
 const trelloReducer = (state = initialState, action) => {
   let stateCopy = { ...state };
