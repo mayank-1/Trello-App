@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import Boards from "./components/Boards";
 
 class App extends Component {
   state = {
@@ -9,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="navigation">
-          <nav className="navbar navbar-light bg-light">
+          <nav className="navbar shadow-sm navbar-light bg-light">
             <span className="navbar-brand mb-0 h1 text-info">
               <i className="fab fa-trello"></i> Trello
             </span>
@@ -49,7 +51,10 @@ class App extends Component {
                   <form
                     onSubmit={e => {
                       e.preventDefault();
-                      console.log("NEW BOARD DATA: ", this.state);
+                      this.props.dispatch({
+                        type: "CREATE_NEW_BOARD",
+                        payload: this.state.title
+                      });
                     }}
                   >
                     <div className="form-group">
@@ -75,9 +80,12 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <div className="allboards">DISPLAY ALL THE CREATED BOARDS HERE</div>
+        <div className="allboards p-5">
+          <Boards />
+        </div>
       </div>
     );
   }
 }
-export default App;
+
+export default connect()(App);
