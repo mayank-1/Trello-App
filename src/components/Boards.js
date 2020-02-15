@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Boards extends Component {
   render() {
@@ -8,13 +9,21 @@ class Boards extends Component {
       <div className="d-flex flex-wrap">
         {this.props.boards.length > 0 ? (
           this.props.boards.map((item, index) => (
-            <div className="card m-2 shadow-sm" style={{ width: "18rem" }}>
-              <div className="card-body">
-                <h5 className="card-title text-center">{item.title}</h5>
-                <div className="text-center display-4">{item.tasks.length}</div>
-                <p className="text-center">Tasks</p>
+            <Link
+              to={`/board/${index}`}
+              key={index}
+              style={{ textDecoration: "none" }}
+            >
+              <div className="card m-2 shadow-sm" style={{ width: "18rem" }}>
+                <div className="card-body">
+                  <h5 className="card-title text-center">{item.title}</h5>
+                  <div className="text-center display-4">
+                    {item.tasks.length}
+                  </div>
+                  <p className="text-center">Tasks</p>
+                </div>
               </div>
-            </div>
+            </Link>
           ))
         ) : (
           <div
