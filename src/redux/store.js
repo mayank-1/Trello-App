@@ -16,6 +16,18 @@ const trelloReducer = (state = initialState, action) => {
       };
       stateCopy = { boards: [...stateCopy.boards, boardItem] };
       return stateCopy;
+
+    case "ADD_NEW_TASK_IN_BOARD":
+      let taskCopy = stateCopy.boards[action.payload.boardId].tasks;
+      let updatedTasks = [...taskCopy, action.payload];
+      let thisBoard = {
+        title: stateCopy.boards[action.payload.boardId].title,
+        tasks: updatedTasks
+      };
+
+      stateCopy.boards[action.payload.boardId] = thisBoard;
+      console.log("NEW STATE AFTER ADDING TASK IN BOARD", stateCopy);
+      return stateCopy;
     default:
       return stateCopy;
   }

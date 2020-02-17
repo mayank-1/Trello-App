@@ -3,15 +3,11 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 class BoardDetails extends Component {
+  state = {
+    taskName: "",
+    boardId: ""
+  };
   render() {
-    console.log(
-      "Lets show the details for Board with ID: ",
-      this.props.match.params.id
-    );
-    console.log(
-      "TITLE OF PARTICULAR BOARD: ",
-      this.props.boards[this.props.match.params.id]
-    );
     return (
       <div>
         <div className="row">
@@ -21,7 +17,7 @@ class BoardDetails extends Component {
             </div>
           </Link>
           <div className="col-md-6 mx-auto align-self-center text-primary mt-3">
-            <h4>
+            <h4 className="text-center">
               {this.props.boards.length > 0
                 ? this.props.boards[this.props.match.params.id].title
                 : "NO BOARDS FOUND PLEASE CREATE ONE"}
@@ -29,7 +25,35 @@ class BoardDetails extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-4 mx-auto bg-info">New task form</div>
+          <div className="col-md-4 mx-auto bg-info">
+            <form
+              onSubmit={e => {
+                e.preventDefault();
+                this.props.dispatch({
+                  type: "ADD_NEW_TASK_IN_BOARD",
+                  payload: {
+                    taskName: this.state.taskName,
+                    boardId: this.props.match.params.id
+                  }
+                });
+              }}
+            >
+              <div className="form-group">
+                <label htmlFor="task-name">Task Name</label>
+                <input
+                  id="task-name"
+                  className="form-control"
+                  onChange={e => this.setState({ taskName: e.target.value })}
+                  type="text"
+                />
+              </div>
+              <input
+                type="submit"
+                className="btn btn-primary form-control"
+                value="ADD TASK"
+              />
+            </form>
+          </div>
           <div className="col-md-6 mx-auto bg-warning">View Task with</div>
         </div>
       </div>
