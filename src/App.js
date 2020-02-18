@@ -62,6 +62,9 @@ class App extends Component {
                               type: "CREATE_NEW_BOARD",
                               payload: this.state.title
                             });
+                            this.setState({
+                              title: ""
+                            });
                           }}
                         >
                           <div className="form-group">
@@ -69,6 +72,7 @@ class App extends Component {
                             <input
                               id="boardTitle"
                               className="form-control"
+                              value={this.state.title}
                               onChange={event =>
                                 this.setState({ title: event.target.value })
                               }
