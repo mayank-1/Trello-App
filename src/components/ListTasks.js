@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import ListComments from "./ListComments";
 
 class ListTasks extends Component {
   state = {
-    commentTitle: ""
+    commentTitle: []
+  };
+
+  handleCommentChange = (e, index) => {
+    let comments = [...this.state.commentTitle];
+    comments[index] = e.target.value;
+    this.setState({ commentTitle: comments });
   };
   render() {
     return (
@@ -43,33 +50,37 @@ class ListTasks extends Component {
                               taskId: index
                             }
                           });
+
+                          let comments = [...this.state.commentTitle];
+                          comments[index] = "";
                           this.setState({
-                            commentTitle: ""
+                            commentTitle: comments
                           });
                         }}
                       >
-                        <div className="form-group">
-                          <input
-                            className="form-control"
-                            placeholder="Type your comment"
-                            type="text"
-                            value={this.state.commentTitle}
-                            onChange={e =>
-                              this.setState({ commentTitle: e.target.value })
+                        <input
+                          className="form-control"
+                          placeholder="Type your comment"
+                          type="text"
+                          value={this.state.commentTitle[index]}
+                          onChange={
+                            e => {
+                              this.handleCommentChange(e, index);
                             }
-                            required
-                          />
-                          <input
-                            type="submit"
-                            className="btn btn-danger"
-                            style={{ visibility: "hidden" }}
-                            value="ADD COMMENT"
-                          />
-                        </div>
+                            //this.setState({ commentTitle: e.target.value })
+                          }
+                          required
+                        />
+                        <input
+                          type="submit"
+                          className="btn btn-danger"
+                          style={{ visibility: "hidden" }}
+                          value="ADD COMMENT"
+                        />
                       </form>
                     </div>
                     <div className="list-comments">
-                      LIST OUT ALL THE COMMENTS HERE
+                      <ListComments taskIdToComment={index} />
                     </div>
                   </div>
                 </div>
