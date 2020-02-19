@@ -6,8 +6,6 @@ class ListTasks extends Component {
     commentTitle: ""
   };
   render() {
-    console.log("PROPS ", this.props);
-
     return (
       <div>
         {this.props.boards.length > 0 ? (
@@ -25,8 +23,13 @@ class ListTasks extends Component {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-4">
-                        <i className="fas fa-comments text-info"></i> 0
+                      <div className="col-md-4 text-info">
+                        <i className="fas fa-comments "></i>{" "}
+                        {
+                          this.props.boards[this.props.selectedBoardID].tasks[
+                            index
+                          ].comments.length
+                        }
                       </div>
                     </div>
                     <div className="card-text comment-form mt-1">
@@ -97,8 +100,6 @@ class ListTasks extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("STATE IN LIST TASKS: ", state);
-
   return state;
 };
 
