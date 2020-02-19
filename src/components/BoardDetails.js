@@ -19,7 +19,7 @@ class BoardDetails extends Component {
               <i className="fas fa-arrow-left"></i>
             </div>
           </Link>
-          <div className="col-md-6 col-xs-8 mx-auto align-self-center text-primary mt-3">
+          <div className="col-md-6 col-xs-8 mx-auto align-self-center text-info mt-3">
             <h4 className="text-center">
               {this.props.boards.length > 0
                 ? this.props.boards[this.props.match.params.id].title
@@ -28,7 +28,7 @@ class BoardDetails extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-4 col-xs-10 mx-auto card shadow p-2">
+          <div className="col-md-4 col-xs-10 mx-auto p-2 m-2">
             <form
               onSubmit={e => {
                 e.preventDefault();
@@ -36,7 +36,9 @@ class BoardDetails extends Component {
                   type: "ADD_NEW_TASK_IN_BOARD",
                   payload: {
                     taskName: this.state.taskName,
-                    boardId: this.props.match.params.id
+                    boardId: this.props.match.params.id,
+                    taskStatus: "PENDING",
+                    comments: []
                   }
                 });
                 this.setState({
@@ -63,7 +65,7 @@ class BoardDetails extends Component {
               />
             </form>
           </div>
-          <div className="col-md-6 col-xs-10 mx-auto">
+          <div className="col-md-6 col-xs-10 mx-auto m-2">
             <div className="row">
               <div className="col-md-4 ml-auto p-2 text-center">
                 <MenuFilter
@@ -72,7 +74,10 @@ class BoardDetails extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-md">
+              <div
+                className="col-md-10 col-xs-10 overflow-auto"
+                style={{ height: "600px" }}
+              >
                 <ListTasks />
               </div>
             </div>

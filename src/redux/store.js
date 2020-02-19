@@ -33,6 +33,19 @@ const trelloReducer = (state = initialState, action) => {
         selectedBoardID: action.payload
       };
       return stateCopy;
+    case "ADD_COMMENT_FOR_TASK":
+      let { title: comment, taskId } = action.payload;
+      let newComment = {
+        title: comment
+      };
+      let commentsCopy =
+        stateCopy.boards[stateCopy.selectedBoardID].tasks[taskId].comments;
+      let updatedComments = [...commentsCopy, newComment];
+
+      stateCopy.boards[stateCopy.selectedBoardID].tasks[
+        taskId
+      ].comments = updatedComments;
+      return stateCopy;
     default:
       return stateCopy;
   }

@@ -10,14 +10,10 @@ export default class MenuFilter extends Component {
   }
   render() {
     return (
-      <div className="btn-group dropdown">
+      <div className="btn-group dropdown shadow-sm">
         <button
           type="button"
-          className={
-            this.state.filterBtnValue === "DONE"
-              ? "btn btn-success dropdown-toggle"
-              : "btn btn-danger dropdown-toggle"
-          }
+          className="btn btn-light border dropdown-toggle"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
