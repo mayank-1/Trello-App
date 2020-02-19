@@ -64,7 +64,7 @@ class BoardDetails extends Component {
                   </div>
                   <input
                     type="submit"
-                    className="btn btn-primary form-control"
+                    className="btn btn-info form-control"
                     value="ADD TASK"
                   />
                 </form>

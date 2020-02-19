@@ -46,6 +46,11 @@ const trelloReducer = (state = initialState, action) => {
         taskId
       ].comments = updatedComments;
       return stateCopy;
+    case "CHANGE_TASK_STATUS":
+      stateCopy.boards[stateCopy.selectedBoardID].tasks[
+        action.payload.taskIndex
+      ].taskStatus = action.payload.status;
+      return stateCopy;
     default:
       return stateCopy;
   }

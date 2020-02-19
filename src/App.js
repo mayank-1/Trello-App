@@ -82,7 +82,7 @@ class App extends Component {
                           </div>
                           <button
                             type="submit"
-                            className="btn form-control btn-primary"
+                            className="btn form-control btn-info"
                           >
                             CREATE
                           </button>

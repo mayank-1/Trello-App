@@ -19,14 +19,55 @@ class ListTasks extends Component {
           this.props.boards[this.props.selectedBoardID].tasks.map(
             (item, index) => {
               return (
-                <div key={index} className="card shadow mt-2 border-primary">
+                <div key={index} className="card shadow mt-2 border-info">
                   <div className="card-body">
                     <div className="row d-flex">
                       <div className="col-md-6 col-xs-5">
                         <h5 className="card-title">{item.taskName}</h5>
                       </div>
                       <div className="col-md-4 col-xs-3 ml-auto">
-                        <p>Doropdown</p>
+                        <form>
+                          <div className="form-group">
+                            <label htmlFor="status" className="text-info">
+                              CHANGE STATUS
+                            </label>
+                            <select
+                              id="status"
+                              className={
+                                this.props.boards[this.props.selectedBoardID]
+                                  .tasks[index].taskStatus === "DONE"
+                                  ? "form-control border-success shadow-sm"
+                                  : this.props.boards[
+                                      this.props.selectedBoardID
+                                    ].tasks[index].taskStatus === "IN-PROGRESS"
+                                  ? "form-control border-warning shadow-sm"
+                                  : "form-control border-danger shadow-sm"
+                              }
+                              value={
+                                this.props.boards[this.props.selectedBoardID]
+                                  .tasks[index].taskStatus
+                              }
+                              onChange={e => {
+                                e.preventDefault();
+                                console.log(
+                                  "VALUE OF STATUS: ",
+                                  e.target.value
+                                );
+                                this.props.dispatch({
+                                  type: "CHANGE_TASK_STATUS",
+                                  payload: {
+                                    status: e.target.value,
+                                    taskIndex: index
+                                  }
+                                });
+                              }}
+                            >
+                              <option value="IN-PROGRESS">IN PROGRESS</option>
+                              <option value="PENDING">PENDING</option>
+                              <option value="DONE">DONE</option>
+                            </select>
+                          </div>
+                        </form>
                       </div>
                     </div>
                     <div className="row">
@@ -63,12 +104,9 @@ class ListTasks extends Component {
                           placeholder="Type your comment"
                           type="text"
                           value={this.state.commentTitle[index]}
-                          onChange={
-                            e => {
-                              this.handleCommentChange(e, index);
-                            }
-                            //this.setState({ commentTitle: e.target.value })
-                          }
+                          onChange={e => {
+                            this.handleCommentChange(e, index);
+                          }}
                           required
                         />
                         <input
