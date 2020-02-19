@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import ListTasks from "./ListTasks";
+import MenuFilter from "./MenuFilter";
 
 class BoardDetails extends Component {
   state = {
     taskName: "",
-    boardId: ""
+    currentFilter: "PENDING"
   };
+
   render() {
     return (
       <div>
@@ -26,7 +28,7 @@ class BoardDetails extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-4 col-xs-10 mx-auto card shadow p-3">
+          <div className="col-md-4 col-xs-10 mx-auto card shadow p-2">
             <form
               onSubmit={e => {
                 e.preventDefault();
@@ -51,6 +53,7 @@ class BoardDetails extends Component {
                   type="text"
                   value={this.state.taskName}
                   placeholder="Enter task name"
+                  required
                 />
               </div>
               <input
@@ -62,13 +65,15 @@ class BoardDetails extends Component {
           </div>
           <div className="col-md-6 col-xs-10 mx-auto">
             <div className="row">
-              <div className="col-md-4 bg-success ml-auto p-2 text-center">
-                FILTER MENU COMPONENT
+              <div className="col-md-4 ml-auto p-2 text-center">
+                <MenuFilter
+                  filterBy={filter => this.setState({ currentFilter: filter })}
+                />
               </div>
             </div>
             <div className="row">
               <div className="col-md">
-                <ListTasks forBoardWithID={this.props.match.params.id} />
+                <ListTasks />
               </div>
             </div>
           </div>

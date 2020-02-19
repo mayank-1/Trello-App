@@ -13,6 +13,12 @@ class Boards extends Component {
               to={`/board/${index}`}
               key={index}
               style={{ textDecoration: "none" }}
+              onClick={() =>
+                this.props.dispatch({
+                  type: "SET_CURRENT_SELECTED_BOARD",
+                  payload: index
+                })
+              }
             >
               <div className="card m-2 shadow-sm" style={{ width: "18rem" }}>
                 <div className="card-body">
