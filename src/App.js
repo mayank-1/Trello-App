@@ -76,6 +76,7 @@ class App extends Component {
                               onChange={event =>
                                 this.setState({ title: event.target.value })
                               }
+                              placeholder="Enter Board Title"
                               required
                             />
                           </div>

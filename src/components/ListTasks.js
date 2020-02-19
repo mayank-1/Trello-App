@@ -14,19 +14,19 @@ class ListTasks extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="col-md-12 col-xs-10 mx-auto">
         {this.props.boards.length > 0 ? (
           this.props.boards[this.props.selectedBoardID].tasks.map(
             (item, index) => {
               return (
                 <div key={index} className="card shadow mt-2 border-primary">
                   <div className="card-body">
-                    <div className="row">
-                      <div className="col-md-6">
+                    <div className="row d-flex">
+                      <div className="col-md-6 col-xs-5">
                         <h5 className="card-title">{item.taskName}</h5>
                       </div>
-                      <div className="col-md-4 ml-auto">
-                        DROPDOWN FOR TASK STATUS
+                      <div className="col-md-4 col-xs-3 ml-auto">
+                        <p>Doropdown</p>
                       </div>
                     </div>
                     <div className="row">
@@ -97,7 +97,7 @@ class ListTasks extends Component {
             </div>
             <div className="card-body text-center">
               <h5 className="card-title">
-                {/* {this.props.items.length} Todo's Found */}
+                {this.props.boards.length} Board's Found */}
               </h5>
               <p className="card-text text-muted">
                 You don't have any task, Enjoy!
