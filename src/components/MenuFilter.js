@@ -1,12 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class MenuFilter extends Component {
+class MenuFilter extends Component {
   state = {
     filterBtnValue: "Filter Todo"
   };
   filter(event) {
     //this.props.filterBy(event);
-    this.setState({ filterBtnValue: event });
+    //this.setState({ filterBtnValue: event });
+    this.props.dispatch({
+      type: "SET_TASKS_FILTER",
+      payload: event
+    });
   }
   render() {
     return (
@@ -18,7 +23,7 @@ export default class MenuFilter extends Component {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {this.state.filterBtnValue}
+          {this.props.currentFilter}
         </button>
         <div className="dropdown-menu">
           <button
@@ -41,3 +46,9 @@ export default class MenuFilter extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return state;
+};
+
+export default connect(mapStateToProps)(MenuFilter);

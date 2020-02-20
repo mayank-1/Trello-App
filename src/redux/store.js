@@ -2,7 +2,8 @@ import { createStore } from "redux";
 
 let initialState = {
   boards: [],
-  selectedBoardID: ""
+  selectedBoardID: "",
+  currentFilter: "PENDING"
 };
 
 const trelloReducer = (state = initialState, action) => {
@@ -27,12 +28,15 @@ const trelloReducer = (state = initialState, action) => {
 
       stateCopy.boards[action.payload.boardId] = thisBoard;
       return stateCopy;
+
     case "SET_CURRENT_SELECTED_BOARD":
       stateCopy = {
         boards: [...stateCopy.boards],
-        selectedBoardID: action.payload
+        selectedBoardID: action.payload,
+        currentFilter: initialState.currentFilter
       };
       return stateCopy;
+
     case "ADD_COMMENT_FOR_TASK":
       let { title: comment, taskId } = action.payload;
       let newComment = {
@@ -46,11 +50,18 @@ const trelloReducer = (state = initialState, action) => {
         taskId
       ].comments = updatedComments;
       return stateCopy;
+
     case "CHANGE_TASK_STATUS":
       stateCopy.boards[stateCopy.selectedBoardID].tasks[
         action.payload.taskIndex
       ].taskStatus = action.payload.status;
       return stateCopy;
+
+    case "SET_TASKS_FILTER":
+      let filterValue = action.payload;
+      stateCopy.currentFilter = filterValue;
+      return stateCopy;
+
     default:
       return stateCopy;
   }

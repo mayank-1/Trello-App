@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 class Boards extends Component {
   render() {
-    console.log("NEW PROPS: ", this.props);
     return (
       <div className="d-flex flex-wrap">
         {this.props.boards.length > 0 ? (

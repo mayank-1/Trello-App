@@ -15,10 +15,10 @@ class ListTasks extends Component {
   render() {
     return (
       <div className="col-md-12 col-xs-10 mx-auto">
-        {this.props.boards.length > 0 ? (
+        {this.props.boards[this.props.selectedBoardID].tasks.length > 0 ? (
           this.props.boards[this.props.selectedBoardID].tasks.map(
             (item, index) => {
-              return (
+              return item.taskStatus === this.props.currentFilter ? (
                 <div key={index} className="card shadow mt-2 border-info">
                   <div className="card-body">
                     <div className="row d-flex">
@@ -49,10 +49,6 @@ class ListTasks extends Component {
                               }
                               onChange={e => {
                                 e.preventDefault();
-                                console.log(
-                                  "VALUE OF STATUS: ",
-                                  e.target.value
-                                );
                                 this.props.dispatch({
                                   type: "CHANGE_TASK_STATUS",
                                   payload: {
@@ -122,6 +118,8 @@ class ListTasks extends Component {
                     </div>
                   </div>
                 </div>
+              ) : (
+                ""
               );
             }
           )
@@ -135,7 +133,8 @@ class ListTasks extends Component {
             </div>
             <div className="card-body text-center">
               <h5 className="card-title">
-                {this.props.boards.length} Board's Found */}
+                {this.props.boards[this.props.selectedBoardID].tasks.length}{" "}
+                Task's Found
               </h5>
               <p className="card-text text-muted">
                 You don't have any task, Enjoy!

@@ -99,7 +99,6 @@ class BoardDetails extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("DATA FROM STORE: ", state);
   return state;
 };
 
