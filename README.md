@@ -17,4 +17,4 @@ A simple application built using React &amp; Redux
 1. Type `npm install` to install all the dependencies.
 2. Type `npm start` to run the application on `localhost:3000`.
 
-### Try the app [LIVE](https://mayank-trello.herokuapp.com/)
+### Try the app [LIVE](https://trello-live.netlify.app/)
